@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock-Paper-Scissors</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Some basic styles */
+    body {
+      background-color: #E6D7C1;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-top: 50px;
+      font-size: 3rem;
+      color: #555555;
+      text-shadow: 1px 1px 0 #FFFFFF;
+    }
+    
+    button {
+      padding: 10px 20px;
+      margin: 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      background-color: #F2B705;
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #E68A00;
+    }
+
+    button:hover {
+      background-color: #F5C347;
+      box-shadow: 3px 3px 0 #E68A00;
+    }
+
+    #result {
+      font-size: 2rem;
+      margin-top: 50px;
+      color: #555555;
+      text-shadow: 1px 1px 0 #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock-Paper-Scissors</h1>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+  <div id="result"></div>
+
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+
+    // Computer chooses a random option
+    function computerPlay() {
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    // Play one round of rock-paper-scissors
+    function playRound(playerSelection, computerSelection) {
+      if (playerSelection === computerSelection) {
+        return "It's a tie!";
+      } else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+      ) {
+        return `You win! ${playerSelection} beats ${computerSelection}.`;
+      } else {
+        return `You lose! ${computerSelection} beats ${playerSelection}.`;
+      }
+    }
+
+    // Update the result div with the outcome of the round
+    function updateResult(result) {
+      const resultDiv = document.querySelector("#result");
+      resultDiv.textContent = result;
+    }
+
+    // Add event listeners to the buttons
+    const rockButton = document.querySelector("#rock");
+    rockButton.addEventListener("click", () => {
+      const result = playRound("rock", computerPlay());
+      updateResult(result);
+    });
+
+    const paperButton = document.querySelector("#paper");
+    paperButton.addEventListener("click", () => {
+      const result = playRound("paper", computerPlay());
+      updateResult(result);
+    });
+
+    const scissorsButton = document.querySelector("#scissors");
+    scissorsButton.addEventListener("click", () => {
+      const result = playRound("scissors", computerPlay());
+      updateResult(result);
+    });
+  </script>
+</body>
+</html>
